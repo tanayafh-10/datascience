@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\HeartAttackPredictionController;
+
 
 Route::get('/', function () {
     return view('home');
@@ -25,3 +28,9 @@ Route::get('/result', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+
+Route::get('/upload', [HeartAttackPredictionController::class, 'showUploadForm'])->name('upload.form');
+Route::post('/upload', [HeartAttackPredictionController::class, 'uploadFile'])->name('upload.file');
+
+Route::resource('books', BookController::class);
