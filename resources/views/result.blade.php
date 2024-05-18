@@ -72,7 +72,24 @@
                             <th scope="col">Result</th>
                         </tr>
                     </thead>
+                    <tbody class="text-center">
+                        @foreach ($heartData as $data)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $data->age }}</td>
+                            <td>{{ $data->gender }}</td>
+                            <td>{{ $data->impulse }}</td>
+                            <td>{{ $data->pressurehight }}</td>
+                            <td>{{ $data->pressurelow }}</td>
+                            <td>{{ $data->glucose }}</td>
+                            <td>{{ $data->kcm }}</td>
+                            <td>{{ $data->troponin }}</td>
+                            <td>{{ $data->class }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
+                {{ $heartData->links() }}
             </div>
         </div>
     </div>

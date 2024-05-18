@@ -34,7 +34,7 @@
 //         $data = array_map('str_getcsv', file($file));
 
 //         // Ambil header dari file CSV
-        // $header = array_shift($data);
+// $header = array_shift($data);
 
 //         // Log header untuk debugging
 //         Log::info('CSV Header:', $header);
@@ -92,9 +92,18 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class HeartAttackPredictionController extends Controller
 {
+    // Metode untuk menampilkan data yang sudah diunggah
+    public function result()
+    {
+        $heartData = HeartData::paginate(30); // Menggunakan metode paginate() langsung di model HeartData
+        return view('result', ['heartData' => $heartData])
+            ->with('i', (request()->input('page', 1) - 1) * 30);
+    }
+
+
     public function showUploadForm()
     {
-        return view('upload');
+        return view('result');
     }
 
     public function uploadFile(CSVUploadRequest $request)
@@ -104,7 +113,7 @@ class HeartAttackPredictionController extends Controller
         if (($handle = fopen($file, 'r')) !== FALSE) {
             // Baca seluruh isi file ke dalam array
             $data = [];
-            while (($row = fgetcsv($handle, 2000, ',')) !== FALSE) {
+            while (($row = fgetcsv($handle, null, ',')) !== FALSE) {
                 $data[] = $row;
             }
             fclose($handle);
@@ -158,10 +167,9 @@ class HeartAttackPredictionController extends Controller
                     'class' => 'required|string',
                 ]);
 
-                if ($validator->fails()) {
-                    // Skip baris yang tidak valid
-                    continue;
-                }
+                // if ($validator->fails()) {
+                //     continue;
+                // }
 
                 HeartData::create($record);
             }
@@ -170,4 +178,3 @@ class HeartAttackPredictionController extends Controller
         return redirect()->back()->with('success', 'File CSV berhasil diunggah dan data disimpan.');
     }
 }
-
