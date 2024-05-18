@@ -53,9 +53,39 @@
     </div>
     <!-- Upload End -->
 
+    <!-- Training Data Start -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Data Training
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <!-- Training Data End -->
+
+    <!-- Testing Data Start -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Data Training
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <!-- Testing Data End -->
+
+    <!-- Klasifikasi Start -->
+    <!-- Klasifikasi End -->
+
     <!-- Table Data Start -->
     <div class="container mt-5">
         <div class="card">
+            <div class="card-header">
+                Data Original
+            </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
