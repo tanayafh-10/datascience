@@ -34,7 +34,7 @@
                 prediksi yang akurat, menjadikannya pilihan kuat untuk aplikasi kami.</p>
             <div class="p-3 text-center">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Tambah Data
+                    Cek Kondisimu
                 </button>
             </div>
         </div>

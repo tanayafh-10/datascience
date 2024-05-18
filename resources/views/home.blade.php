@@ -11,9 +11,8 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">DataSience</h5>
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">Heart Disease Classification</h1>
-                            <a href="quote.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Start</a>
-                            <a href=""
-                                class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Register</a>
+                            <a href="check" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Start</a>
+                            <a href="login" class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Login</a>
                         </div>
                     </div>
                 </div>
@@ -24,8 +23,6 @@
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">FOR</h5>
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">Heart Disease Prediction</h1>
                             <a href="quote.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Start</a>
-                            <a href=""
-                                class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Register</a>
                         </div>
                     </div>
                 </div>
@@ -54,8 +51,8 @@
                             <i class="fa fa-users text-primary"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="text-white mb-0">Happy Clients</h5>
-                            <h1 class="text-white mb-0" data-toggle="counter-up">12345</h1>
+                            <h5 class="text-white mb-0">Data</h5>
+                            <h1 class="text-white mb-0" data-toggle="counter-up">from Kaggle</h1>
                         </div>
                     </div>
                 </div>
@@ -67,8 +64,8 @@
                             <i class="fa fa-check text-white"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="text-primary mb-0">Projects Done</h5>
-                            <h1 class="mb-0" data-toggle="counter-up">12345</h1>
+                            <h5 class="text-primary mb-0">Instance</h5>
+                            <h1 class="mb-0" data-toggle="counter-up">1319</h1>
                         </div>
                     </div>
                 </div>
@@ -80,8 +77,8 @@
                             <i class="fa fa-award text-primary"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="text-white mb-0">Win Awards</h5>
-                            <h1 class="text-white mb-0" data-toggle="counter-up">12345</h1>
+                            <h5 class="text-white mb-0">Atibut</h5>
+                            <h1 class="text-white mb-0" data-toggle="counter-up">9</h1>
                         </div>
                     </div>
                 </div>
@@ -137,8 +134,7 @@
                 Dalam prediksi penyakit jantung, Naive Bayes memanfaatkan data kesehatan pengguna untuk menghasilkan
                 prediksi yang akurat, menjadikannya pilihan kuat untuk aplikasi kami.</p>
             <div class="p-3 text-center">
-                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Start</a>
-                <a href="" class="btn btn-outline-dark py-md-3 px-md-5 animated slideInRight">Register</a>
+                <a href="check" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Start</a>
             </div>
         </div>
     </div>
