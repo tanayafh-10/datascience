@@ -33,9 +33,163 @@
                 Dalam prediksi penyakit jantung, Naive Bayes memanfaatkan data kesehatan pengguna untuk menghasilkan
                 prediksi yang akurat, menjadikannya pilihan kuat untuk aplikasi kami.</p>
             <div class="p-3 text-center">
-                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Tambah Data</a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Tambah Data
+                </button>
             </div>
         </div>
     </div>
     <!-- Check End -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cek Kondisi Jantung Anda Sekarang!</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="heartCheckForm">
+                        <div class="row">
+                            <div class="col-md-6 ms-auto">
+                                <div class="mb-3">
+                                    <label for="age" class="form-label">Age *</label>
+                                    <input type="text" class="form-control" id="age" placeholder="Insert Your Age"
+                                        required>
+                                    <div class="invalid-feedback">Please provide your age.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ms-auto">
+                                <div class="mb-3">
+                                    <label for="gender" class="form-label">Gender *</label>
+                                    <div class="row">
+                                        <div class="col-8 col-sm-6 ms-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender"
+                                                    id="genderFemale" value="0" required>
+                                                <label class="form-check-label" for="genderFemale">
+                                                    Female
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-sm-6 ms-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender"
+                                                    id="genderMale" value="1" required>
+                                                <label class="form-check-label" for="genderMale">
+                                                    Male
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="impulse" class="form-label">Impulse *</label>
+                            <input type="text" class="form-control" id="impulse"
+                                placeholder="Insert your Heart Rate. (e.g. '94')" required>
+                            <div class="invalid-feedback">Please provide your heart rate.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pressurehight" class="form-label">Pressure Hight *</label>
+                            <input type="text" class="form-control" id="pressurehight"
+                                placeholder="Insert your Systolic Blood Pressure. (e.g., '120')" required>
+                            <div class="invalid-feedback">Please provide your systolic blood pressure.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pressurelow" class="form-label">Pressure Low *</label>
+                            <input type="text" class="form-control" id="pressurelow"
+                                placeholder="Insert your Diastolic Blood Pressure. (e.g., '80')" required>
+                            <div class="invalid-feedback">Please provide your diastolic blood pressure.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="glucose" class="form-label">Glucose *</label>
+                            <input type="text" class="form-control" id="glucose"
+                                placeholder="Insert your Blood Sugar. (e.g., '100')" required>
+                            <div class="invalid-feedback">Please provide your blood sugar level.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kcm" class="form-label">KCM *</label>
+                            <input type="text" class="form-control" id="kcm"
+                                placeholder="Insert your CK-MB test result. (e.g., '3.43')" required>
+                            <div class="invalid-feedback">Please provide your CK-MB test result.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="troponin" class="form-label">Troponin *</label>
+                            <input type="text" class="form-control" id="troponin"
+                                placeholder="Insert your Troponin test result. (e.g., '0.012')" required>
+                            <div class="invalid-feedback">Please provide your troponin test result.</div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                            <label class="form-check-label" for="exampleCheck1">Are you sure the data is correct?
+                                *</label>
+                            <div class="invalid-feedback">Please confirm the correctness of your data.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="handleSubmit(event)">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            // Get the form element
+            var form = document.getElementById('heartCheckForm');
+
+            // Check if the form is valid
+            if (form.checkValidity() === false) {
+                // If the form is not valid, show browser's validation message
+                form.reportValidity();
+                return;
+            }
+
+            // Close the modal
+            var myModalEl = document.getElementById('exampleModal');
+            var modal = bootstrap.Modal.getInstance(myModalEl);
+            modal.hide();
+
+            // Show loading message
+            Swal.fire({
+                title: 'Processing',
+                text: 'Your check result is being processed...',
+                icon: 'info',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Simulate processing delay (10 seconds)
+            setTimeout(function() {
+                // Close the loading message
+                Swal.close();
+
+                // Show the SweetAlert2 popup after the modal is hidden
+                myModalEl.addEventListener('hidden.bs.modal', function() {
+                    Swal.fire({
+                        title: 'Negative!',
+                        text: 'Berdasarkan hasil pengecekan jantung Anda, tidak ada masalah yang ditemukan. Jantung Anda berada dalam kondisi yang baik dan sehat. Teruslah menjaga gaya hidup sehat dan lakukan pemeriksaan rutin untuk tetap memastikan kesehatan jantung Anda tetap prima.',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#06A3DA'
+                    });
+                }, {
+                    once: true
+                });
+
+                // Trigger the hidden.bs.modal event to ensure the success popup appears after the modal is closed
+                myModalEl.dispatchEvent(new Event('hidden.bs.modal'));
+            }, 5000); // 5 seconds delay
+        }
+    </script>
 @endsection
