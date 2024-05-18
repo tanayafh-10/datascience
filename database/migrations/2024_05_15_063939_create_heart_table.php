@@ -14,18 +14,18 @@ return new class extends Migration
         Schema::create('heart', function (Blueprint $table) {
             $table->id();
             $table->integer('age');
-            $table->boolean('gender');
-            $table->float('impulse');
-            $table->float('pressurehight');
-            $table->float('pressurelow');
-            $table->float('glucose');
+            $table->integer('gender');
+            $table->integer('impluse');
+            $table->integer('pressurehight');
+            $table->integer('pressurelow');
+            $table->integer('glucose');
             $table->float('kcm');
             $table->float('troponin');
             $table->string('class');
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */

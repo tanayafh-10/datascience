@@ -12,6 +12,6 @@ class HeartData extends Model
     protected $table = 'heart'; // Pastikan nama tabel benar
 
     protected $fillable = [
-        'age', 'gender', 'impulse', 'pressurehight', 'pressurelow', 'glucose', 'kcm', 'troponin', 'class',
+        'age', 'gender', 'impluse', 'pressurehight', 'pressurelow', 'glucose', 'kcm', 'troponin', 'class',
     ];
 }
