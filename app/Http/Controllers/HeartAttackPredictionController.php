@@ -57,7 +57,7 @@
 //             }
 
 //             // Pastikan semua kunci ada sebelum memasukkan ke database
-//             if (isset($rowData['age'], $rowData['gender'], $rowData['impluse'], $rowData['pressurehight'], $rowData['pressurelow'], $rowData['glucose'], $rowData['kcm'], $rowData['troponin'], $rowData['class'])) {
+//             if (isset($rowData['age'], $rowData['gender'], $rowData['impulse'], $rowData['pressurehight'], $rowData['pressurelow'], $rowData['glucose'], $rowData['kcm'], $rowData['troponin'], $rowData['class'])) {
 //                 // Insert data ke database
 //                 HeartData::create([
 //                     'age' => $rowData['age'],
@@ -117,16 +117,16 @@ class HeartAttackPredictionController extends Controller
 
             // Debug: Log header CSV dan header yang diharapkan
             Log::debug('Header CSV: ' . json_encode($header));
-            Log::debug('Expected Headers: ' . json_encode(['age', 'gender', 'impluse', 'pressurehight', 'pressurelow', 'glucose', 'kcm', 'troponin', 'class']));
+            Log::debug('Expected Headers: ' . json_encode(['age', 'gender', 'impulse', 'pressurehight', 'pressurelow', 'glucose', 'kcm', 'troponin', 'class']));
 
             // Debug: Print headers for manual inspection
             echo '<pre>';
             var_dump($header);
-            var_dump(['age', 'gender', 'impluse', 'pressurehight', 'pressurelow', 'glucose', 'kcm', 'troponin', 'class']);
+            var_dump(['age', 'gender', 'impulse', 'pressurehight', 'pressurelow', 'glucose', 'kcm', 'troponin', 'class']);
             echo '</pre>';
 
             // Validasi header sesuai dengan kolom tabel
-            $expectedHeaders = ['age', 'gender', 'impluse', 'pressurehight', 'pressurelow', 'glucose', 'kcm', 'troponin', 'class']; // Sesuaikan dengan kolom tabel Anda
+            $expectedHeaders = ['age', 'gender', 'impulse', 'pressurehight', 'pressurelow', 'glucose', 'kcm', 'troponin', 'class']; // Sesuaikan dengan kolom tabel Anda
             if ($header !== $expectedHeaders) {
                 return redirect()->back()->withErrors(['File CSV tidak sesuai dengan format yang diharapkan']);
             }
@@ -137,7 +137,7 @@ class HeartAttackPredictionController extends Controller
                 $record = [
                     'age' => $row[0],
                     'gender' => $row[1],
-                    'impluse' => $row[2],
+                    'impulse' => $row[2],
                     'pressurehight' => $row[3],
                     'pressurelow' => $row[4],
                     'glucose' => $row[5],
@@ -149,7 +149,7 @@ class HeartAttackPredictionController extends Controller
                 $validator = Validator::make($record, [
                     'age' => 'required|integer',
                     'gender' => 'required|string',
-                    'impluse' => 'required|integer',
+                    'impulse' => 'required|integer',
                     'pressurehight' => 'required|integer',
                     'pressurelow' => 'required|integer',
                     'glucose' => 'required|integer',

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('age');
             $table->integer('gender');
-            $table->integer('impluse');
+            $table->integer('impulse');
             $table->integer('pressurehight');
             $table->integer('pressurelow');
             $table->integer('glucose');
