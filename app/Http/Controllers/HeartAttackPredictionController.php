@@ -95,9 +95,8 @@ class HeartAttackPredictionController extends Controller
     // Metode untuk menampilkan data yang sudah diunggah
     public function result()
     {
-        $heartData = HeartData::paginate(30); // Menggunakan metode paginate() langsung di model HeartData
-        return view('result', ['heartData' => $heartData])
-            ->with('i', (request()->input('page', 1) - 1) * 30);
+        $heartData = HeartData::latest()->paginate(50); // Menggunakan metode paginate() langsung di model HeartData
+        return view('result', compact('heartData'));
     }
 
 
