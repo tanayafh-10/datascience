@@ -24,9 +24,7 @@ Route::get('/check', function () {
     return view('check');
 })->name('check');
 
-Route::get('/result', function () {
-    return view('result');
-})->name('result');
+Route::get('/result', [HeartAttackPredictionController::class, 'result'])->name('result');
 
 Route::get('/contact', function () {
     return view('contact');
