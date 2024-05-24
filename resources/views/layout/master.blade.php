@@ -55,7 +55,7 @@
                     <a href="{{ route('about') }}" class="nav-item nav-link {{ request()->routeIs('about') ? 'active' : ''}}">About</a>
                     <a href="{{ route('method') }}" class="nav-item nav-link {{ request()->routeIs('method') ? 'active' : ''}}">Method</a>
                     <a href="{{ route('check') }}" class="nav-item nav-link {{ request()->routeIs('check') ? 'active' : ''}}">Heart Check</a>
-                    <a href="{{ route('result.index') }}" class="nav-item nav-link {{ request()->routeIs('result') ? 'active' : ''}}">Result</a>
+                    <a href="{{ route('result') }}" class="nav-item nav-link {{ request()->routeIs('result') ? 'active' : ''}}">Result</a>
                     <a href="{{ route('contact') }}" class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : ''}}">Contact</a>
                 </div>
                 <butaton type="button" class="btn text-primary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>

@@ -50,7 +50,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="heartCheckForm">
+                    <form action="{{ url('/check') }}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6 ms-auto">
                                 <div class="mb-3">
@@ -138,7 +139,18 @@
         </div>
     </div>
 
+    <!-- Tampilkan notifikasi hasil prediksi -->
+    @if (isset($result))
     <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Hasil Prediksi',
+            text: 'Label yang diprediksi: {{ $result }}',
+        });
+    </script>
+    @endif
+
+    {{-- <script>
         function handleSubmit(event) {
             event.preventDefault();
 
@@ -191,5 +203,5 @@
                 myModalEl.dispatchEvent(new Event('hidden.bs.modal'));
             }, 5000); // 5 seconds delay
         }
-    </script>
+    </script> --}}
 @endsection

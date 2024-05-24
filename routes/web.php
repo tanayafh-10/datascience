@@ -26,11 +26,12 @@ Route::get('/check', function () {
     return view('check');
 })->name('check');
 
-Route::post('/check', [HeartAttackPredictionController::class, 'predictFromForm']);
-
-Route::get('/result', [HeartDataController::class, 'index'])->name('result');
 
 Route::resource('result', HeartDataController::class);
+Route::post('/result', [HeartAttackPredictionController::class, 'trainModel']);
+Route::post('/check', [HeartAttackPredictionController::class, 'classify']);
+Route::get('/result', [HeartDataController::class, 'index'])->name('result');
+
 
 
 Route::get('/contact', function () {

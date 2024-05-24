@@ -64,6 +64,13 @@
             <div class="card-header bg-primary d-flex justify-content-between align-items-center"
              data-bs-toggle="collapse" data-bs-target="#testingCollapse" aria-expanded="false" aria-controls="testingCollapse">
                 <h2 class="mb-0 d-inline">Data Original</h2>
+                <form action="{{ url('/result') }}" 
+                style="color: black" method="POST">
+                    @csrf
+                    <button class="btn btn-transparent me-1" style="border-radius: 10px;" 
+                    onmouseover="this.style.backgroundColor='#AFAFAF';" 
+                    onmouseout="this.style.backgroundColor='transparent';" type="submit">Train</button>
+                </form>
                 <div>
                     <button class="btn btn-transparent ms-1" data-bs-toggle="modal" data-bs-target="#createModal"
                      style="border-radius: 10px;" onmouseover="this.style.backgroundColor='#AFAFAF';" 
@@ -177,7 +184,7 @@
     <!-- Table Data End -->
 
     <!-- Create Modal -->
-    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -228,5 +235,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

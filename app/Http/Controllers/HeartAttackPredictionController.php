@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Http\FormRequest;
 use Phpml\Classification\NaiveBayes;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 
@@ -92,79 +93,56 @@ class HeartAttackPredictionController extends Controller
         return redirect()->back()->with('success', 'File CSV berhasil diunggah dan data disimpan.');
     } 
 
-    private $classifier;
-    private $trained;
-
-    public function __construct()
-    {
-        // Load model yang telah dilatih saat constructor dipanggil
-        $this->classifier = $this->loadModel();
-        $this->trained = session()->has('classifier');
-    }
-
-    private function loadModel()
-    {
-        // Cek apakah model ada di session
-        if (session()->has('classifier')) {
-            return unserialize(session('classifier'));
-        }
-
-        // Jika tidak, buat classifier baru
-        return new NaiveBayes();
-    }
-
     public function trainModel()
     {
-        $heartData = HeartData::all();
+        // Mengambil dataset dari database
+        $datasets = HeartData::all();
         $samples = [];
         $labels = [];
 
-        foreach ($heartData as $data) {
+        foreach ($datasets as $data) {
             $samples[] = [
-                $data->age,
-                $data->gender,
-                $data->impulse,
-                $data->pressurehight,
-                $data->pressurelow,
-                $data->glucose,
-                $data->kcm,
-                $data->troponin,
+                $data->age, $data->gender, $data->impulse,
+                $data->pressurehight, $data->pressurelow,
+                $data->glucose, $data->kcm, $data->troponin
             ];
             $labels[] = $data->class;
         }
 
-        // Melatih model
-        $this->classifier->train($samples, $labels);
+        // Membuat dan melatih model
+        $classifier = new NaiveBayes();
+        $classifier->train($samples, $labels);
 
-        // Simpan model yang telah dilatih ke session
-        session(['classifier' => serialize($this->classifier)]);
-        $this->trained = true;
+        // Simpan model ke session
+        session(['naive_bayes_model' => serialize($classifier)]);
+
+        // Redirect kembali ke halaman result dengan pesan sukses
+        return redirect('/result')->with('success', 'Model trained successfully');
     }
 
-    public function predictFromForm(Request $request)
+    public function showResult()
     {
-        try {
-            if (!$this->trained) {
-                return response()->json(['error' => 'Model belum dilatih. Lakukan pelatihan model terlebih dahulu.'], 400);
-            }
+        
+    }
 
-            $newData = [
-                $request->age,
-                $request->gender,
-                $request->impulse,
-                $request->pressurehight,
-                $request->pressurelow,
-                $request->glucose,
-                $request->kcm,
-                $request->troponin,
-            ];
-
-            $predictedClass = $this->classifier->predict([$newData]);
-
-            return response()->json(['predictedClass' => $predictedClass]);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+    public function classify(Request $request)
+    {
+        // Ambil model dari session
+        $classifier = unserialize(session('naive_bayes_model'));
+    
+        // Data yang akan diklasifikasikan
+        $testSample = [
+            $request->input('age'), $request->input('gender'), $request->input('impulse'),
+            $request->input('pressurehight'), $request->input('pressurelow'),
+            $request->input('glucose'), $request->input('kcm'), $request->input('troponin')
+        ];
+        $predictedLabel = $classifier->predict($testSample);
+    
+        // Tampilkan notifikasi dengan SweetAlert2
+        Alert::success('Hasil Prediksi', 'Label yang diprediksi: ' . $predictedLabel);
+    
+        // Kembalikan pengguna ke halaman result
+        return redirect('/result');
     }
 
 }
