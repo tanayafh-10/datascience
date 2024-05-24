@@ -1,16 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\HeartAttackPredictionController;
-use App\Http\Controllers\PredictionController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\AllController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AllController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PredictionController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\HeartAttackPredictionController;
+use App\Http\Controllers\HeartDataController;
 
-Route::get('/home', [AllController::class, 'home'])->name('home');
+Route::get('/', [AllController::class, 'home'])->name('home');
 
 Route::get('/about', function () {
     return view('about');
@@ -24,7 +26,12 @@ Route::get('/check', function () {
     return view('check');
 })->name('check');
 
-Route::get('/result', [HeartAttackPredictionController::class, 'result'])->name('result');
+Route::post('/check', [HeartAttackPredictionController::class, 'predictFromForm']);
+
+Route::get('/result', [HeartDataController::class, 'index'])->name('result');
+
+Route::resource('result', HeartDataController::class);
+
 
 Route::get('/contact', function () {
     return view('contact');
