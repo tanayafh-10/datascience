@@ -51,8 +51,8 @@
                             <i class="fa fa-users text-primary"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="text-white mb-0">Data</h5>
-                            <h1 class="text-white mb-0" data-toggle="counter-up">from Kaggle</h1>
+                            <h5 class="text-white mb-0">Data Source</h5>
+                            <h1 class="text-white mb-0" data-toggle="counter-up">Kaggle</h1>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                             <i class="fa fa-award text-primary"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="text-white mb-0">Atibut</h5>
+                            <h5 class="text-white mb-0">Atibute</h5>
                             <h1 class="text-white mb-0" data-toggle="counter-up">9</h1>
                         </div>
                     </div>

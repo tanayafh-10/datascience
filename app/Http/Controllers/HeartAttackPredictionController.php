@@ -20,7 +20,7 @@ class HeartAttackPredictionController extends Controller
 {
     public function showUploadForm()
     {
-        return view('result');
+        return view('upload');
     }
 
     public function uploadFile(CSVUploadRequest $request)
@@ -92,7 +92,7 @@ class HeartAttackPredictionController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'File CSV berhasil diunggah dan data disimpan.');
+        return redirect()->route('result')->with('success', 'File CSV berhasil diunggah dan data disimpan.');
     }
 
     public function result()

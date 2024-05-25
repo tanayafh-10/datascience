@@ -7,9 +7,9 @@
             <div class="row py-5">
                 <div class="col-12 pt-lg-5 mt-lg-5 text-center">
                     <h1 class="display-4 text-white animated zoomIn">Check Result</h1>
-                    <a href="" class="h5 text-white">Home</a>
+                    <a href="/" class="h5 text-white">Home</a>
                     <i class="far fa-circle text-white px-2"></i>
-                    <a href="" class="h5 text-white">Result</a>
+                    <a href="/result" class="h5 text-white">Result</a>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
     <!-- Training Data Start -->
     <div class="container mt-5">
         <div class="card card-responsive">
-            <div class="card-header bg-primary d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            <div class="card-header bg-info d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
                 data-bs-target="#accuracyCollapse" aria-expanded="false" aria-controls="accuracyCollapse">
                 <h2 class="mb-0 d-inline">Data Performance</h2>
                 <div>
@@ -160,7 +160,7 @@
     <!-- Testing Data Start -->
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header bg-primary d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            <div class="card-header bg-info d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
                 data-bs-target="#testingCollapse" aria-expanded="false" aria-controls="testingCollapse">
                 <h2 class="mb-0 d-inline">Data Testing</h2>
                 <div>
@@ -171,8 +171,8 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
-                            <thead>
-                                <tr class="table-primary">
+                            <thead class="text-center">
+                                <tr>
                                     <th scope="col">No.</th>
                                     <th scope="col">Age</th>
                                     <th scope="col">Gender</th>
@@ -212,7 +212,7 @@
     <!-- Training Data Start -->
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header bg-primary d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            <div class="card-header bg-info d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
                 data-bs-target="#trainingCollapse" aria-expanded="false" aria-controls="trainingCollapse">
                 <h2 class="mb-0 d-inline">Data Training</h2>
                 <div>
@@ -223,8 +223,8 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
-                            <thead>
-                                <tr class="table-primary">
+                            <thead class="text-center">
+                                <tr>
                                     <th scope="col">No.</th>
                                     <th scope="col">Age</th>
                                     <th scope="col">Gender</th>
@@ -263,7 +263,7 @@
     <!-- Original Data Start -->
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header bg-primary d-flex justify-content-between align-items-center"
+            <div class="card-header bg-info d-flex justify-content-between align-items-center"
                 data-bs-toggle="collapse" data-bs-target="#dataCollapse" aria-expanded="false"
                 aria-controls="dataCollapse">
                 <h2 class="mb-0 d-inline">Data Original</h2>
@@ -275,8 +275,8 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
-                            <thead>
-                                <tr class="table-primary">
+                            <thead class="text-center">
+                                <tr>
                                     <th scope="col">No.</th>
                                     <th scope="col">Age</th>
                                     <th scope="col">Gender</th>
