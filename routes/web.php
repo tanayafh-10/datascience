@@ -11,6 +11,7 @@ use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HeartAttackPredictionController;
 use App\Http\Controllers\HeartDataController;
+use App\Http\Controllers\HeartCheckController;
 
 Route::get('/', [AllController::class, 'home'])->name('home');
 
@@ -22,21 +23,12 @@ Route::get('/method', function () {
     return view('method');
 })->name('method');
 
-Route::get('/check', function () {
-    return view('check');
-})->name('check');
+Route::get('/check', [HeartCheckController::class, 'index'])->name('check');
+Route::post('/predict', [HeartCheckController::class, 'predict'])->name('predict');
 
 
-Route::resource('result', HeartDataController::class);
-Route::post('/result', [HeartAttackPredictionController::class, 'trainModel']);
-Route::post('/check', [HeartAttackPredictionController::class, 'classify']);
-Route::get('/result', [HeartDataController::class, 'index'])->name('result');
-
-
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::delete('/result/destroy/{id}', [HeartAttackPredictionController::class, 'destroy'])->name('result.destroy');
+Route::get('/result', [HeartAttackPredictionController::class, 'result'])->name('result');
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login_action']);
@@ -51,5 +43,3 @@ Route::post('/daftar', [RegisterController::class, 'register'])->name('register'
 
 Route::get('/upload', [HeartAttackPredictionController::class, 'showUploadForm'])->name('upload.form');
 Route::post('/upload', [HeartAttackPredictionController::class, 'uploadFile'])->name('upload.file');
-
-Route::resource('books', BookController::class);

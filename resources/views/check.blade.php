@@ -34,7 +34,7 @@
                 prediksi yang akurat, menjadikannya pilihan kuat untuk aplikasi kami.</p>
             <div class="p-3 text-center">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Cek Kondisimu
+                    Tambah Data
                 </button>
             </div>
         </div>
@@ -50,8 +50,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('/check') }}" method="POST">
-                        @csrf
+                    <form id="heartCheckForm">
                         <div class="row">
                             <div class="col-md-6 ms-auto">
                                 <div class="mb-3">
@@ -94,7 +93,7 @@
                             <div class="invalid-feedback">Please provide your heart rate.</div>
                         </div>
                         <div class="mb-3">
-                            <label for="pressurehight" class="form-label">Pressure Hight *</label>
+                            <label for="pressurehight" class="form-label">Pressure High *</label>
                             <input type="text" class="form-control" id="pressurehight"
                                 placeholder="Insert your Systolic Blood Pressure. (e.g., '120')" required>
                             <div class="invalid-feedback">Please provide your systolic blood pressure.</div>
@@ -139,37 +138,21 @@
         </div>
     </div>
 
-    <!-- Tampilkan notifikasi hasil prediksi -->
-    @if (isset($result))
     <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Hasil Prediksi',
-            text: 'Label yang diprediksi: {{ $result }}',
-        });
-    </script>
-    @endif
-
-    {{-- <script>
         function handleSubmit(event) {
             event.preventDefault();
 
-            // Get the form element
             var form = document.getElementById('heartCheckForm');
 
-            // Check if the form is valid
             if (form.checkValidity() === false) {
-                // If the form is not valid, show browser's validation message
                 form.reportValidity();
                 return;
             }
 
-            // Close the modal
             var myModalEl = document.getElementById('exampleModal');
             var modal = bootstrap.Modal.getInstance(myModalEl);
             modal.hide();
 
-            // Show loading message
             Swal.fire({
                 title: 'Processing',
                 text: 'Your check result is being processed...',
@@ -181,27 +164,57 @@
                 }
             });
 
-            // Simulate processing delay (10 seconds)
-            setTimeout(function() {
-                // Close the loading message
-                Swal.close();
+            var formData = {
+                age: document.getElementById('age').value,
+                gender: document.querySelector('input[name="gender"]:checked').value,
+                impulse: document.getElementById('impulse').value,
+                pressurehight: document.getElementById('pressurehight').value,
+                pressurelow: document.getElementById('pressurelow').value,
+                glucose: document.getElementById('glucose').value,
+                kcm: document.getElementById('kcm').value,
+                troponin: document.getElementById('troponin').value
+            };
 
-                // Show the SweetAlert2 popup after the modal is hidden
-                myModalEl.addEventListener('hidden.bs.modal', function() {
+            fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.close();
+
+                    if (data.result == 'positive') {
+                        Swal.fire({
+                            title: 'Positive!',
+                            text: 'Hasil pengecekan menunjukkan bahwa Anda memiliki risiko penyakit jantung. Silakan konsultasi dengan dokter untuk pemeriksaan lebih lanjut.',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF0000'
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Negative!',
+                            text: 'Berdasarkan hasil pengecekan jantung Anda, tidak ada masalah yang ditemukan. Jantung Anda berada dalam kondisi yang baik dan sehat. Teruslah menjaga gaya hidup sehat dan lakukan pemeriksaan rutin untuk tetap memastikan kesehatan jantung Anda tetap prima.',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#06A3DA'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.close();
                     Swal.fire({
-                        title: 'Negative!',
-                        text: 'Berdasarkan hasil pengecekan jantung Anda, tidak ada masalah yang ditemukan. Jantung Anda berada dalam kondisi yang baik dan sehat. Teruslah menjaga gaya hidup sehat dan lakukan pemeriksaan rutin untuk tetap memastikan kesehatan jantung Anda tetap prima.',
-                        icon: 'success',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan saat memproses permintaan Anda. Silakan coba lagi.',
+                        icon: 'error',
                         confirmButtonText: 'OK',
-                        confirmButtonColor: '#06A3DA'
+                        confirmButtonColor: '#FF0000'
                     });
-                }, {
-                    once: true
                 });
-
-                // Trigger the hidden.bs.modal event to ensure the success popup appears after the modal is closed
-                myModalEl.dispatchEvent(new Event('hidden.bs.modal'));
-            }, 5000); // 5 seconds delay
         }
-    </script> --}}
+    </script>
 @endsection

@@ -56,7 +56,6 @@
                     <a href="{{ route('method') }}" class="nav-item nav-link {{ request()->routeIs('method') ? 'active' : ''}}">Method</a>
                     <a href="{{ route('check') }}" class="nav-item nav-link {{ request()->routeIs('check') ? 'active' : ''}}">Heart Check</a>
                     <a href="{{ route('result') }}" class="nav-item nav-link {{ request()->routeIs('result') ? 'active' : ''}}">Result</a>
-                    <a href="{{ route('contact') }}" class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : ''}}">Contact</a>
                 </div>
                 <butaton type="button" class="btn text-primary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>
             </div>
@@ -138,7 +137,6 @@
                                 <a class="text-light mb-2" href="/method"><i class="bi bi-arrow-right text-primary me-2"></i>Method</a>
                                 <a class="text-light mb-2" href="/check"><i class="bi bi-arrow-right text-primary me-2"></i>Heart Check</a>
                                 <a class="text-light mb-2" href="/result"><i class="bi bi-arrow-right text-primary me-2"></i>Result</a>
-                                <a class="text-light" href="/contact"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
@@ -151,7 +149,6 @@
                                 <a class="text-light mb-2" href="/method"><i class="bi bi-arrow-right text-primary me-2"></i>Method</a>
                                 <a class="text-light mb-2" href="/check"><i class="bi bi-arrow-right text-primary me-2"></i>Heart Check</a>
                                 <a class="text-light mb-2" href="/result"><i class="bi bi-arrow-right text-primary me-2"></i>Result</a>
-                                <a class="text-light" href="/contact"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
                             </div>
                         </div>
                     </div>

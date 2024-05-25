@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CSVUploadRequest;
@@ -8,14 +9,15 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
+use Phpml\Dataset\ArrayDataset;
 use Phpml\Classification\NaiveBayes;
-use RealRashid\SweetAlert\Facades\Alert;
-
-
+use Phpml\CrossValidation\StratifiedRandomSplit;
+use Phpml\Metric\Accuracy;
+use Phpml\Metric\ConfusionMatrix;
 
 class HeartAttackPredictionController extends Controller
 {
-
     public function showUploadForm()
     {
         return view('result');
@@ -77,8 +79,8 @@ class HeartAttackPredictionController extends Controller
                     'pressurehight' => 'required|integer',
                     'pressurelow' => 'required|integer',
                     'glucose' => 'required|integer',
-                    'kcm' => 'required|numeric',
-                    'troponin' => 'required|numeric',
+                    'kcm' => 'required|float',
+                    'troponin' => 'required|float',
                     'class' => 'required|string',
                 ]);
 
@@ -91,58 +93,83 @@ class HeartAttackPredictionController extends Controller
         }
 
         return redirect()->back()->with('success', 'File CSV berhasil diunggah dan data disimpan.');
-    } 
+    }
 
-    public function trainModel()
+    public function result()
     {
-        // Mengambil dataset dari database
-        $datasets = HeartData::all();
+        // Ambil data original untuk ditampilkan
+        $heartData = HeartData::latest()->paginate(50);
+
+        // Convert the paginated data into a dataset object
+        $dataset = new ArrayDataset($heartData->items(), $heartData->pluck('class')->toArray());
+
+        // Bagi data menjadi data training dan data testing
+        $split = new StratifiedRandomSplit($dataset, 0.7);
+
+        $trainingData = $split->getTrainSamples();
+        $testingData = $split->getTestSamples();
+
+        // Lakukan training menggunakan data training
+        $classifier = new NaiveBayes();
         $samples = [];
         $labels = [];
-
-        foreach ($datasets as $data) {
+        foreach ($trainingData as $item) {
             $samples[] = [
-                $data->age, $data->gender, $data->impulse,
-                $data->pressurehight, $data->pressurelow,
-                $data->glucose, $data->kcm, $data->troponin
+                $item['age'],
+                $item['gender'],
+                $item['impulse'],
+                $item['pressurehight'],
+                $item['pressurelow'],
+                $item['glucose'],
+                $item['kcm'],
+                $item['troponin'],
             ];
-            $labels[] = $data->class;
+            $labels[] = $item['class'];
         }
-
-        // Membuat dan melatih model
-        $classifier = new NaiveBayes();
         $classifier->train($samples, $labels);
 
-        // Simpan model ke session
-        session(['naive_bayes_model' => serialize($classifier)]);
+        // Lakukan prediksi untuk data testing
+        $predictions = [];
+        foreach ($testingData as $item) {
+            $predictions[] = $classifier->predict([
+                $item['age'],
+                $item['gender'],
+                $item['impulse'],
+                $item['pressurehight'],
+                $item['pressurelow'],
+                $item['glucose'],
+                $item['kcm'],
+                $item['troponin'],
+            ]);
+        }
 
-        // Redirect kembali ke halaman result dengan pesan sukses
-        return redirect('/result')->with('success', 'Model trained successfully');
+        // Hitung metrik evaluasi
+        $testLabels = $split->getTestLabels();
+        $accuracy = Accuracy::score($testLabels, $predictions);
+        $confusionMatrix = ConfusionMatrix::compute($testLabels, $predictions);
+
+        // Hitung presisi dan recall
+        $truePositives = $confusionMatrix[1][1]; // True Positives
+        $falsePositives = $confusionMatrix[0][1]; // False Positives
+        $falseNegatives = $confusionMatrix[1][0]; // False Negatives
+
+        $precision = $truePositives / ($truePositives + $falsePositives);
+        $recall = $truePositives / ($truePositives + $falseNegatives);
+
+        // Simpan model ke dalam database
+        DB::table('models')->insert(['model' => serialize($classifier)]);
+
+        // Kirim data ke halaman result
+        return view('result', compact('heartData', 'trainingData', 'testingData', 'predictions', 'accuracy', 'confusionMatrix', 'precision', 'recall'));
     }
 
-    public function showResult()
-    {
-        
-    }
 
-    public function classify(Request $request)
+    public function destroy($id)
     {
-        // Ambil model dari session
-        $classifier = unserialize(session('naive_bayes_model'));
-    
-        // Data yang akan diklasifikasikan
-        $testSample = [
-            $request->input('age'), $request->input('gender'), $request->input('impulse'),
-            $request->input('pressurehight'), $request->input('pressurelow'),
-            $request->input('glucose'), $request->input('kcm'), $request->input('troponin')
-        ];
-        $predictedLabel = $classifier->predict($testSample);
-    
-        // Tampilkan notifikasi dengan SweetAlert2
-        Alert::success('Hasil Prediksi', 'Label yang diprediksi: ' . $predictedLabel);
-    
-        // Kembalikan pengguna ke halaman result
-        return redirect('/result');
+        $data = HeartData::findOrFail($id);
+        $data->delete();
+
+        return redirect()->route('result')->with('success', 'Data deleted successfully.');
     }
 
 }
