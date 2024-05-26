@@ -57,6 +57,7 @@
                     <a href="{{ route('check') }}" class="nav-item nav-link {{ request()->routeIs('check') ? 'active' : ''}}">Heart Check</a>
                     <a href="{{ route('upload.form') }}" class="nav-item nav-link {{ request()->routeIs('upload.form') ? 'active' : ''}}">Upload</a>
                     <a href="{{ route('result') }}" class="nav-item nav-link {{ request()->routeIs('result') ? 'active' : ''}}">Result</a>
+                    <a href="{{ route('logout') }}" class="nav-item nav-link {{ request()->routeIs('logout') ? 'active' : ''}}">Logout</a>
                 </div>
                 <butaton type="button" class="btn text-primary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>
             </div>

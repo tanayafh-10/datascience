@@ -13,7 +13,9 @@ use App\Http\Controllers\HeartAttackPredictionController;
 use App\Http\Controllers\HeartDataController;
 use App\Http\Controllers\HeartCheckController;
 
-Route::get('/', [AllController::class, 'home'])->name('home');
+Route::get('/home', [AllController::class, 'home'])->name('home');
+
+Route::get('/', [AllController::class, 'index']);
 
 Route::get('/about', function () {
     return view('about');
@@ -40,10 +42,12 @@ Route::get('/daftar', [RegisterController::class, 'daftar'])->name('daftar');
 Route::post('/daftar', [RegisterController::class, 'register'])->name('register');
 
 
-// 
+//
 Route::middleware('auth')->group(function () {
     Route::get('/upload', [HeartAttackPredictionController::class, 'showUploadForm'])->name('upload.form');
     Route::post('/upload', [HeartAttackPredictionController::class, 'uploadFile'])->name('upload.file');
     Route::delete('/result/destroy/{id}', [HeartAttackPredictionController::class, 'destroy'])->name('result.destroy');
     Route::get('/result', [HeartAttackPredictionController::class, 'result'])->name('result');
 });
+
+Route::get('/logout', [AllController::class, 'logout'])->name('logout');
