@@ -367,7 +367,7 @@
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <h4 class="text-primary">Full Name</h4>
+                            <h4 class="text-primary">Nabilah Zakiyah S. F.</h4>
                             <p class="text-uppercase m-0">Designation</p>
                         </div>
                     </div>
@@ -388,7 +388,7 @@
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <h4 class="text-primary">Full Name</h4>
+                            <h4 class="text-primary">Tanaya Fadillah</h4>
                             <p class="text-uppercase m-0">Designation</p>
                         </div>
                     </div>
@@ -409,7 +409,7 @@
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <h4 class="text-primary">Full Name</h4>
+                            <h4 class="text-primary">Wzamah Al Hussein</h4>
                             <p class="text-uppercase m-0">Designation</p>
                         </div>
                     </div>
@@ -417,7 +417,7 @@
                 <div class="col-lg-3 wow slideInUp" data-wow-delay="1.2s">
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
+                            <img class="img-fluid w-100" src="img/pasfoto.jpg" alt="">
                             <div class="team-social">
                                 <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i
                                         class="fab fa-twitter fw-normal"></i></a>
@@ -430,7 +430,7 @@
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <h4 class="text-primary">Full Name</h4>
+                            <h4 class="text-primary">Zaidatul Na'ima</h4>
                             <p class="text-uppercase m-0">Designation</p>
                         </div>
                     </div>
