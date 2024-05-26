@@ -4,7 +4,7 @@
 	<title>Heart Check - Register</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="{{ asset('/img/favicon.png') }}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href=" {{ asset('/login/vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -19,7 +19,7 @@
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url(login/images/bg-01.jpg);">
 					<span class="login100-form-title-1">
-						REGISTER
+						<h1>REGISTER</h1>
 					</span>
 				</div>
 				@if (session()->has('success') || session()->has('error'))
@@ -57,14 +57,14 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="flex-sb-m w-full p-b-30">
+					{{-- <div class="flex-sb-m w-full p-b-30">
 
 						<div>
 							<a href="{{ route('password.request') }}" class="txt1">
 								Lupa Password?
 							</a>
 						</div>
-					</div>
+					</div> --}}
 
 					@error('level')
                             <div class="text-danger">{{ $message }}</div>

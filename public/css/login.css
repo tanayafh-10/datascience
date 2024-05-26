@@ -1,6 +1,7 @@
 .limiter {
     width: 100%;
     margin: 0 auto;
+    background: transparent;
 }
 
 .container-login100 {
@@ -9,16 +10,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #3498db; /* Biru sebagai background luar */
+    background-image: url(../img/bg.jpg); /* Mengatur background image */
+    background-size: cover; /* Menutupi seluruh area elemen */
 }
+
 
 .wrap-login100 {
     width: 800px;
     display: flex;
     border-radius: 10px;
     overflow: hidden;
-    background-color: white; /* Kotak berwarna putih untuk form */
-    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    background-color: rgba(255, 255, 255, 0.8); /* Kotak berwarna putih dengan transparansi */
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1)
 }
 
 .login100-pic {
@@ -26,14 +30,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white; /* Background putih untuk bagian kiri */
-    color: #333;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1)
+
 }
 
 .login100-form {
     width: 40%;
     padding: 60px;
-    background-color: white; /* Background putih untuk bagian form */
+    background: transparent;
+    /* background-color: rgba(255, 255, 255, 0.8); Background putih untuk bagian form */
 }
 
 /* Tambah margin bawah pada input email */

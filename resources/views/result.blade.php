@@ -96,12 +96,12 @@
             </div>
             <div id="accuracyCollapse" class="collapse">
                 <div class="card-body">
-                    <h3>Performance Metrics:</h3>
+                    <h3>Performance Matrix:</h3>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Metric</th>
+                                    <th>Matrix</th>
                                     <th>Value</th>
                                 </tr>
                             </thead>

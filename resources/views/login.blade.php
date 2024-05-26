@@ -4,7 +4,7 @@
 	<title>Heart Check - Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="{{ asset('/img/favicon.png') }}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href=" {{ asset('/login/vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -13,13 +13,13 @@
 
 </head>
 <body>
-	
+
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <div class="login100-pic" style="background-image: url('login/images/bg-01.jpg');">
+            <div class="login100-pic" >
                 <span class="login100-form-title">
-                    LOG IN
+                    <h1>LOG IN</h1>
                 </span>
             </div>
 
@@ -46,13 +46,13 @@
                 </div>
 
                 <!-- Forgot Password Link -->
-                <!-- <div class="flex-sb-m w-full p-b-30">
+                <div class="flex-sb-m w-full p-b-30">
                     <div>
-                        <a href="{{ route('password.request') }}" class="txt1">
-                            Lupa Password?
+                        <a href="{{ route('register') }}" class="txt1">
+                            Belum punya akun? Daftar
                         </a>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- Submit Button -->
                 <div class="container-login100-form-btn">
@@ -65,7 +65,7 @@
     </div>
 </div>
 
-	
+
 <!--===============================================================================================-->
 	<script src=" {{ asset('/login/vendor/jquery/jquery-3.2.1.min.js ') }}"></script>
 <!--===============================================================================================-->
