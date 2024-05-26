@@ -27,8 +27,6 @@ Route::get('/check', [HeartCheckController::class, 'index'])->name('check');
 Route::post('/predict', [HeartCheckController::class, 'predict'])->name('predict');
 
 
-Route::delete('/result/destroy/{id}', [HeartAttackPredictionController::class, 'destroy'])->name('result.destroy');
-Route::get('/result', [HeartAttackPredictionController::class, 'result'])->name('result');
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login_action']);
@@ -41,5 +39,11 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'reset'])->name
 Route::get('/daftar', [RegisterController::class, 'daftar'])->name('daftar');
 Route::post('/daftar', [RegisterController::class, 'register'])->name('register');
 
-Route::get('/upload', [HeartAttackPredictionController::class, 'showUploadForm'])->name('upload.form');
-Route::post('/upload', [HeartAttackPredictionController::class, 'uploadFile'])->name('upload.file');
+
+// 
+Route::middleware('auth')->group(function () {
+    Route::get('/upload', [HeartAttackPredictionController::class, 'showUploadForm'])->name('upload.form');
+    Route::post('/upload', [HeartAttackPredictionController::class, 'uploadFile'])->name('upload.file');
+    Route::delete('/result/destroy/{id}', [HeartAttackPredictionController::class, 'destroy'])->name('result.destroy');
+    Route::get('/result', [HeartAttackPredictionController::class, 'result'])->name('result');
+});
